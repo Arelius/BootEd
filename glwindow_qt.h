@@ -16,6 +16,11 @@ protected:
     void initializeGL();
     void resizeGL(int w, int h);
     void paintGL();
+
+    // Input events
+    void mousePressEvent(QMouseEvent* e);
+    void mouseReleaseEvent(QMouseEvent* e);
+    void mouseMoveEvent(QMouseEvent* e);
 private:
     struct ViewInfo* view;
 };

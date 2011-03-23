@@ -39,6 +39,7 @@ struct ViewInfo
     Editor_Mesh* grid;
 
     bool key_down;
+    bool bMouseDown;
 };
 
 ViewInfo* InitView()
@@ -73,6 +74,8 @@ ViewInfo* InitView()
 
     view->key_down = false;
 
+    view->bMouseDown = false;
+
     return view;
 }
 
@@ -94,8 +97,12 @@ void UpdateView(ViewInfo* view)
     glClear(GL_COLOR_BUFFER_BIT);
 
     glUseProgram(view->basic_shader);
-    glUniform4f(view->diffuse_color_uniform,
-                0.0f, 1.0f, 0.0f, 1.0f);
+    if(view->bMouseDown)
+        glUniform4f(view->diffuse_color_uniform,
+                    0.0f, 1.0f, 0.0f, 1.0f);
+    else
+        glUniform4f(view->diffuse_color_uniform,
+                    1.0f, 0.0f, 0.0f, 1.0f);
 
     glBindBuffer(GL_ARRAY_BUFFER, view->test_mesh);
     ApplyVertexDef(view->boot_vert);
@@ -134,3 +141,15 @@ void ReceiveKeyInput(InputHandler* input, int code, KeyStatus status)
         }
     }
 }
+
+void MouseDown(ViewInfo* view, int x, int y, MouseButtons butons)
+{
+    view->bMouseDown = true;
+}
+
+void MouseUp(ViewInfo* view, int x, int y, MouseButtons butons)
+{
+    view->bMouseDown = false;
+}
+
+void MouseMove(ViewInfo* view, int x, int y, MouseButtons butons) {}
