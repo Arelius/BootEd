@@ -49,8 +49,18 @@ ViewInfo* InitView()
     view->basic_shader = CreateShaderProgram(SHADER_CONSTANT_COLOR);
     view->diffuse_color_uniform = glGetUniformLocation(view->basic_shader,
                                                        "diffuse_color");
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
 
     glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_COLOR_ARRAY);
+    glEnableClientState(GL_NORMAL_ARRAY);
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+    glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
+    glEnableVertexAttribArray(2);
+    glEnableVertexAttribArray(3);
 
     view->boot_vert = boot_vert_def();
 
@@ -94,7 +104,7 @@ void ResizeView(ViewInfo*, int, int)
 
 void UpdateView(ViewInfo* view)
 {
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glUseProgram(view->basic_shader);
     if(view->bMouseDown)
