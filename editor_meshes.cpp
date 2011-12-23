@@ -3,8 +3,8 @@
 #include "editor_meshes.h"
 #include "simple_mesh.h"
 #include "simple_vectors.h"
+#include "gl_all.h"
 
-#include <gl.h>
 #include <assert.h>
 
 struct Editor_Mesh
@@ -79,6 +79,8 @@ Editor_Mesh* CreateGridMesh(unsigned int num_grid_lines, float grid_spacing)
     mesh->gl_mesh = CreateMesh(num_verts, sizeof(editor_vert), verts);
     mesh->gl_index_count = num_verts;
     mesh->gl_primitive_type = GL_LINES;
+
+    return mesh;
 }
 
 void DestroyMesh(Editor_Mesh* mesh)
