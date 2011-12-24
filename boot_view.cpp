@@ -6,7 +6,7 @@
 #include "simple_mesh.h"
 
 #include "editor_meshes.h"
-#include <gl.h>
+#include "gl_all.h"
 
 struct boot_vert
 {
