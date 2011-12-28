@@ -66,18 +66,24 @@
   <ItemGroup>
     <ClCompile Include="boot_view.cpp" />
     <ClCompile Include="editor_meshes.cpp" />
+    <ClCompile Include="file.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="obj_load.cpp" />
     <ClCompile Include="reporting.cpp" />
     <ClCompile Include="simple_mesh.cpp" />
     <ClCompile Include="simple_shader.cpp" />
+    <ClCompile Include="simple_texture.cpp" />
     <ClCompile Include="sys_win.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="editor_meshes.h" />
+    <ClInclude Include="file.h" />
     <ClInclude Include="gl_all.h" />
+    <ClInclude Include="obj_load.h" />
     <ClInclude Include="reporting.h" />
     <ClInclude Include="simple_mesh.h" />
     <ClInclude Include="simple_shader.h" />
+    <ClInclude Include="simple_texture.h" />
     <ClInclude Include="simple_vectors.h" />
     <ClInclude Include="view_decl.h" />
   </ItemGroup>
