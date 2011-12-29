@@ -4,6 +4,7 @@
 #include "simple_shader.h"
 #include "simple_vectors.h"
 #include "simple_mesh.h"
+#include "system.h"
 
 #include "editor_meshes.h"
 #include "gl_all.h"
@@ -36,6 +37,8 @@ struct ViewInfo
     VertexDef boot_vert;
     GLuint test_mesh;
     Editor_Mesh* grid;
+
+    bool key_down;
 };
 
 ViewInfo* InitView()
@@ -66,7 +69,9 @@ ViewInfo* InitView()
     view->test_mesh = CreateMesh(3, sizeof(boot_vert), verts);
 
     InitEditor();
-    view->grid = CreateGridMesh(10, 0.1);
+    view->grid = CreateGridMesh(10, 0.1f);
+
+    view->key_down = false;
 
     return view;
 }
@@ -96,7 +101,36 @@ void UpdateView(ViewInfo* view)
     ApplyVertexDef(view->boot_vert);
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
-    glUniform4f(view->diffuse_color_uniform,
-                1.0f, 0.0f, 0.0f, 1.0f);
+    if(view->key_down)
+    {
+        glUniform4f(view->diffuse_color_uniform,
+                    0.0f, 0.0f, 1.0f, 1.0f);
+    }
+    else
+    {
+        glUniform4f(view->diffuse_color_uniform,
+                    1.0f, 0.0f, 0.0f, 1.0f);
+    }
     DrawEditorMesh(view->grid);
+}
+
+InputHandler* GetInputHandler(ViewInfo* view)
+{
+    return (InputHandler*)view;
+}
+
+void ReceiveKeyInput(InputHandler* input, int code, KeyStatus status)
+{
+    ViewInfo* view = (ViewInfo*)input;
+    if(code == GetKeyCodeFromAscii('W'))
+    {
+        if(status == Key_Down)
+        {
+            view->key_down = true;
+        }
+        else if(status == Key_Up)
+        {
+            view->key_down = false;
+        }
+    }
 }

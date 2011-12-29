@@ -85,6 +85,7 @@
     <ClInclude Include="simple_shader.h" />
     <ClInclude Include="simple_texture.h" />
     <ClInclude Include="simple_vectors.h" />
+    <ClInclude Include="system.h" />
     <ClInclude Include="view_decl.h" />
   </ItemGroup>
   <ItemGroup>
